@@ -38,42 +38,61 @@ describe Guess do
   end
 
   describe '.repeated?' do
+    let(:running_guess) { "_a_a_a" } # banana
+    let(:misses) { ['c'] }
+
+    def run_repeated?(guessed_char)
+      Guess.repeated?(
+        guessed_char, running_guess, misses)
+    end
 
     context 'when letter is neither in misses nor in running guess' do
+      let(:guess_in_neither) { 'b' }
       it 'should return false' do
-        res = guess_in_neither.(running_guess, misses)
-        expect(res).to eq(false)
+        expect( 
+            run_repeated?(guess_in_neither)
+          ).to eq(false)
       end
     end
 
     context 'when letter in misses' do
+      let(:guess_lowercase_in_misses) { 'c' }
+      let(:guess_uppercase_in_misses) { 'C' }
+
       context 'and lowercase' do
         it 'should return true' do
-          res = guess_lowercase_in_misses.(running_guess, misses)
-          expect(res).to eq(true)
+          expect( 
+              run_repeated?(guess_lowercase_in_misses)
+            ).to eq(true)
         end
       end
 
       context 'and uppercase' do
         it 'should return true' do
-          res = guess_uppercase_in_misses.(running_guess, misses)
-          expect(res).to eq(true)
+          expect( 
+              run_repeated?(guess_uppercase_in_misses)
+            ).to eq(true)
         end
       end
     end
 
     context 'when letter in running guesses' do
+      let(:guess_lowercase_in_running) { 'a' }
+      let(:guess_uppercase_in_running) { 'A' }
+
       context 'and lowercase' do
         it 'should return true' do
-          res = guess_lowercase_in_running.(running_guess, misses)
-          expect(res).to eq(true)
+          expect( 
+              run_repeated?(guess_lowercase_in_running)
+            ).to eq(true)
         end
       end
 
       context 'and uppercase' do
         it 'should return true' do
-          res = guess_uppercase_in_running.(running_guess, misses)
-          expect(res).to eq(true)
+          expect( 
+              run_repeated?(guess_uppercase_in_running)
+            ).to eq(true)
         end
       end
     end

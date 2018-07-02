@@ -1,21 +1,13 @@
-class Checker
-  #TODO Do not rely on modules to create status objects.
+#TODO Re-evaluate the need for this class. Also, does it need to be a class?
+#TODO Do not rely on modules to create status objects.
+
+module Checker
   module Invalid; end
   module Included; end
   module Missing; end
   module ExactMatch; end
-  module Repeated; end
-
-  def initialize(secret_word)
-    @secret_word = secret_word
-  end
-  attr_reader :secret_word
 
   class << self
-
-    def init(secret_word)
-      @checker ||= self.new(secret_word)
-    end
 
     # This method tells you whether the current guess is:
     #   - Exactly matches the secret.
@@ -40,7 +32,6 @@ class Checker
         Checker::Missing
       end
     end
-
 
   end
 end

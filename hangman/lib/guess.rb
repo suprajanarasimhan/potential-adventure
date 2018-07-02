@@ -21,17 +21,18 @@ class Guess
     end
   end
 
-  # A in running_guess
-  # A in misses
-  # a in running_guess
-  # a in misses
-  def repeated?(running_guess, misses)
-    self.value.downcase
-  end
-
   class << self
     def get
       guess = self.new(gets.chomp)
+    end
+
+    # Both support #include?:
+    #   -- String `running_guess` 
+    #   -- Array `misses` 
+    #
+    def repeated?(guessed_char, running_guess, misses)
+      guess_downcase = guessed_char.downcase
+      running_guess.include?(guess_downcase) || misses.include?(guess_downcase)
     end
   end
 end

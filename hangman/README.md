@@ -1,6 +1,8 @@
 # Overview
 This is a simple command line Hangman game.
-The plan is to expand it into a browser and mobile game as well.
+
+# Future Directions
+Extend UI to web and mobile.
 
 # How to run the game.
 1. Clone the repository to your local machine.

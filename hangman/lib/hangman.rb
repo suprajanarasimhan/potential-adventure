@@ -1,12 +1,11 @@
-#TODO Change GitHub email.
-#TODO If I already guessed a letter - repeated.
+#TODO Change GitHub config.
 
-#TODO If I hit CTRL+C, gracefully abort.
 #TODO Move all literals (including those that are part of interpolation statements) to en.yml.
 #TODO Replace the "Remaining guesses:" count with images.
 #TODO Separate I/O statements from game logic.
 #TODO Consolidate initialization calls in a single file.
 #TODO Support a way to globally require byebug debugger.
+
 require 'byebug'
 require_relative '../lib/translations.rb'
 require_relative "../config/initializers/lib_file_loader.rb"
@@ -16,17 +15,18 @@ class Hangman
   include Translations
   extend Logging
 
+  def initialize
+  end
   class << self
     attr_accessor :misses, :remaining_guesses, :secret
 
     def run
-      run_initializers
+      init_misses_and_guesses
       run_intro
       run_game
     end
 
-    def run_initializers
-      # Initialize misses to an empty Array.
+    def init_misses_and_guesses
       @@misses = []
       @@remaining_guesses = 10
     end
@@ -75,7 +75,7 @@ class Hangman
 
     def guess_and_check
       guess = get_guess
-      if guess.valid?
+      if guess.valid? 
         run_check(guess)
       else
         puts I18n.t "guess.invalid"
@@ -100,17 +100,22 @@ class Hangman
     end
 
     def run_check(guess)
-      guessed_char = guess.value
-      result = Checker.run(self.secret.word, guessed_char)
+      guessed_val = guess.value
+      
+      if Guess.repeated?(guessed_val, self.secret.running_guess, @@misses)        
+        handle_repeated 
+      else
+        result = Checker.run(self.secret.word, guessed_val)
+        print "You guessed: #{guessed_val}. ==> "
+        logger.debug "result: #{result}"
 
-      print "You guessed: #{guessed_char}. ==> "
-      logger.debug "result: #{result}"
-
-      handle_result(result, guessed_char)
-      continue_or_exit
+        handle_result(result, guessed_val, self.secret.running_guess)
+        continue_or_exit
+      end
     end
 
-    def handle_result(result, guessed_char)
+    #TODO Move `handle_*` methods to a separate module/class.
+    def handle_result(result, guessed_char, running_guess)      
       case result.to_s
       when "Checker::ExactMatch"
         handle_exact_match!
@@ -132,6 +137,11 @@ class Hangman
       handle_exit('success') if secret.revealed?
     end
 
+    def handle_repeated
+      puts I18n.t "guess.repeated"      
+      guess_and_check
+    end
+
     def handle_missed!(guessed_char)
       puts I18n.t 'guess.missed'
       @@misses << guessed_char
@@ -141,4 +151,8 @@ class Hangman
 end
 
 #TODO Move to a file "main.rb"
-Hangman.run
+begin 
+  Hangman.run
+rescue Interrupt => e
+  Hangman.handle_exit('abort')
+end

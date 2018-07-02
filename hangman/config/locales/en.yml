@@ -18,12 +18,13 @@ en:
     missed: "Nope, that's not quite right. Be bold and try again."
     included: "Excellent, this letter is in the word!"
     exact_match: "Awesome, right on the money."
-    repeated: "Ah, you already guessed this character. I won't penalize for this guess." 
+    repeated: "Ah, you already guessed this. Therefore, I won't deduct from your remaining guesses." 
 
   exit: 
-    fail: "\n\n**** Aw, no guesses left. FYI, the secret was \"%{secret}\". Come back and play again! Farewell. :) ****"
+    fail: "\n\n**** You lost. The secret was \"%{secret}\". Don't lose heart. Come back and play again! Farewell. :) ****"
     success: "\n\n****  You won! \"%{secret}\" is right. Fantastic job. =D ****"
-  
+    abort: "\n\n**** Leaving early today, I see. Thanks for playing. Come back another time."
+ 
   game: 
     status:
         start: "\n#### Game Status ####"

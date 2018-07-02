@@ -1,7 +1,6 @@
 describe Checker do
   describe '::run' do
     let(:word) {'carrot'}
-    let(:running_guess) { "_" * (word*size)}
     let(:guess) {'a'}
     let(:guess_included_lowercase) {guess}
     let(:guess_included_uppercase) {guess.upcase}
