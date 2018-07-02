@@ -1,4 +1,4 @@
-describe Guess do 
+describe Guess do
   let(:guess_nil) { Guess.new(nil) }
   let(:guess_empty_str) { Guess.new('') }
   let(:guess_fixnum) { Guess.new(4) }
@@ -8,33 +8,33 @@ describe Guess do
   let(:guess_multi_w_non_letters) {Guess.new('g5')}
 
   describe '.valid?' do
-  	context 'when nil' do
-  	  it { expect(guess_nil.valid?).to eq(false) }
-  	end
+    context 'when nil' do
+      it { expect(guess_nil.valid?).to eq(false) }
+    end
 
-  	context 'when empty' do
-  	  it { expect(guess_empty_str.valid?).to eq(false) }
-  	end
-  	
-  	context 'when non-character (e.g. Fixnum)' do
-  	  it { expect(guess_fixnum.valid?).to eq(false) }
-  	end
+    context 'when empty' do
+      it { expect(guess_empty_str.valid?).to eq(false) }
+    end
 
-  	context 'when upper case letter' do
-	  it { expect(guess_letter_upcased.valid?).to eq(true) }
-  	end
+    context 'when non-character (e.g. Fixnum)' do
+      it { expect(guess_fixnum.valid?).to eq(false) }
+    end
 
-  	context 'when lower case letter' do
-	  it { expect(guess_letter_downcased.valid?).to eq(true) }
-  	end
+    context 'when upper case letter' do
+      it { expect(guess_letter_upcased.valid?).to eq(true) }
+    end
 
-  	context 'when multi-letter' do
-	  it { expect(guess_multi_letter.valid?).to eq(true) }
-  	end
+    context 'when lower case letter' do
+      it { expect(guess_letter_downcased.valid?).to eq(true) }
+    end
 
-  	context 'when word containing non-letter chars' do
-	  it { expect(guess_multi_w_non_letters.valid?).to eq(false) }
-  	end
+    context 'when multi-letter' do
+      it { expect(guess_multi_letter.valid?).to eq(true) }
+    end
+
+    context 'when word containing non-letter chars' do
+      it { expect(guess_multi_w_non_letters.valid?).to eq(false) }
+    end
   end
 
   describe '.repeated?' do

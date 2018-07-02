@@ -1,22 +1,22 @@
-#TODO Apply Sublime Ruby formatter.
+#TODO Change GitHub email.
 #TODO If I already guessed a letter - repeated.
-#TODO If I hit CTRL+C.
 
-
+#TODO If I hit CTRL+C, gracefully abort.
 #TODO Move all literals (including those that are part of interpolation statements) to en.yml.
-#TODO Replace the "Remaining guesses:" with imagery.
+#TODO Replace the "Remaining guesses:" count with images.
 #TODO Separate I/O statements from game logic.
 #TODO Consolidate initialization calls in a single file.
+#TODO Support a way to globally require byebug debugger.
 require 'byebug'
 require_relative '../lib/translations.rb'
 require_relative "../config/initializers/lib_file_loader.rb"
- 
+
 class Hangman
   include LibFileLoader
   include Translations
   extend Logging
 
-  class << self  
+  class << self
     attr_accessor :misses, :remaining_guesses, :secret
 
     def run
@@ -59,7 +59,7 @@ class Hangman
     #     win due to exact guess - immediate
     #     win due to exact guess - cumulative
     #
-    def continue_or_exit  
+    def continue_or_exit
       if @@remaining_guesses <= 0
         handle_exit('fail')
       else
@@ -75,7 +75,7 @@ class Hangman
 
     def guess_and_check
       guess = get_guess
-      if guess.valid? 
+      if guess.valid?
         run_check(guess)
       else
         puts I18n.t "guess.invalid"
