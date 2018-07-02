@@ -11,3 +11,9 @@ ruby lib/hangman.rb
 
 # How to run tests.
 bundle exec rspec
+
+# Troubleshooting
+To change log level, change value of `LOG_STATUS` constant in lib/logging.rb:
+```
+  LOG_LEVEL = Logger::DEBUG
+```
