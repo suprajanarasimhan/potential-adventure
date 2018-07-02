@@ -1,4 +1,3 @@
-#TODO Requires of 'i18n' should be consolidated.
 require_relative '../lib/translations.rb'
 
 class Dictionary

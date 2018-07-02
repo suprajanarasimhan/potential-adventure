@@ -1,14 +1,18 @@
 #TODO Apply Sublime Ruby formatter.
+#TODO If I already guessed a letter - repeated.
+#TODO If I hit CTRL+C.
+
+
 #TODO Move all literals (including those that are part of interpolation statements) to en.yml.
 #TODO Replace the "Remaining guesses:" with imagery.
 #TODO Separate I/O statements from game logic.
-require 'byebug'
-
 #TODO Consolidate initialization calls in a single file.
+require 'byebug'
+require_relative '../lib/translations.rb'
 require_relative "../config/initializers/lib_file_loader.rb"
-LibFileLoader.run
  
 class Hangman
+  include LibFileLoader
   include Translations
   extend Logging
 
@@ -46,9 +50,6 @@ class Hangman
       puts I18n.t "get_word.got_it"
     end
 
-    #TODO If I already guessed a letter - repeated.
-
-    #TODO If I hit CTRL+C.
     #TODO Play another round?
     #TODO Write tests for:
     #     tally
@@ -68,7 +69,7 @@ class Hangman
     end
 
     def handle_exit(status_str)
-      puts I18n.t "exit.#{status_str}"
+      puts I18n.t "exit.#{status_str}", secret: self.secret.word
       exit
     end
 
@@ -95,11 +96,7 @@ class Hangman
     end
 
     def printable_misses
-      if @@misses.empty?
-        "None."
-      else
-        @@misses
-      end
+      @@misses.empty? ? "None." : @@misses
     end
 
     def run_check(guess)

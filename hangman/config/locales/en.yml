@@ -7,7 +7,7 @@ en:
     lets_play: "**** Let's play Hangman! ****"
     explain: "I'm going to think of a word, and you guess what it is.\nYou can guess individual letters or the whole word, your choice. Note that substrings will count against you, even if they match the secret word."
     # Change the name of this nested key or move it to en.get_word.
-    get_word: "\n\n**** Let me think of a word ... ****"
+    get_word: "\n\n**** Let me think of a secret word ... ****"
 
   get_word:
     got_it: OK, I got one!
@@ -17,12 +17,12 @@ en:
     enter: "\nGuess a letter in the word, or guess the word itself. Enter your guess ..."
     missed: "Nope, that's not quite right. Be bold and try again."
     included: "Excellent, this letter is in the word!"
-    exact_match: "Awesome, right on the money. You guessed the word correctly."
+    exact_match: "Awesome, right on the money."
     repeated: "Ah, you already guessed this character. I won't penalize for this guess." 
 
   exit: 
-    fail: "\n\n**** So you lost this time, no biggie. Keep at it and play again! Farewell till then. :) ****"
-    success: "\n\n**** You won! Fantastic job. =D ****"
+    fail: "\n\n**** Aw, no guesses left. FYI, the secret was \"%{secret}\". Come back and play again! Farewell. :) ****"
+    success: "\n\n****  You won! \"%{secret}\" is right. Fantastic job. =D ****"
   
   game: 
     status:

@@ -4,6 +4,10 @@ module LibFileLoader
   #TODO Make it so `include Logging` is sufficient, rather than `extend Logging.`
   extend Logging
 
+  def self.included(base)
+    LibFileLoader.run
+  end
+
   class << self
 
   	def run
