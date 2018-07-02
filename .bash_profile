@@ -3,7 +3,7 @@
 eval "$(ssh-agent -s)"
 eval "$(ssh-add ~/.ssh/id_rsa)"
 
-# Initialize .rbenv.
+# Initialize rbenv.
 eval "$(rbenv init -)"
 
 # rw - Ruby Workspace.
